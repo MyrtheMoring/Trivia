@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class trivia_game extends AppCompatActivity implements trivia_game_request.Callback{
+public class TriviaGameActivity extends AppCompatActivity implements TriviaGameRequest.Callback{
 
     String category, level;
     int score;
@@ -18,43 +18,43 @@ public class trivia_game extends AppCompatActivity implements trivia_game_reques
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trivia_game);
+
         Intent intent = getIntent();
         category = intent.getStringExtra("category");
         level = intent.getStringExtra("level");
 
         score = 0;
 
-        trivia_game_request request = new trivia_game_request(this);
+        TriviaGameRequest request = new TriviaGameRequest(this);
         request.getQuestions(this, category, level);
-
     }
 
-
-
+    /** The button onClick function to check the score after answering the questions.*/
     public void check_score(View v) {
-        Intent intent = new Intent(this, score_overview.class);
+        Intent intent = new Intent(this, EnterNameActivity.class);
         intent.putExtra("score","Score "+score);
         startActivity(intent);
     }
 
+    /** Set the adapter with the questions.*/
     @Override
     public void gotQuestions(ArrayList<Question> questions) {
-        trivia_game_adapter adapter = new trivia_game_adapter(this, R.layout.content_question, questions);
+        TriviaGameAdapter adapter = new TriviaGameAdapter(this, R.layout.content_question, questions);
         ListView listView = (ListView) findViewById(R.id.q_list);
         listView.setAdapter(adapter);
     }
 
+    /** When there is an error with obtaining the questions.*/
     @Override
     public void gotQuestionsError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    /** Function that checks if the clicked answer is true or not. */
     public void questionCheck(View view) {
         String check = view.getTag().toString();
         if (check == "True"){
             score = score + 1;
         }
     }
-
-
 }

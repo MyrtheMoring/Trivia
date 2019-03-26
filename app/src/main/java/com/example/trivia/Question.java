@@ -2,11 +2,13 @@ package com.example.trivia;
 
 import java.util.ArrayList;
 
+/** The class for the question. */
 public class Question {
-    String question;
-    String correct_answer;
-    ArrayList<String> incorrect_answers;
 
+    private String question, correct_answer;
+    private ArrayList<String> incorrect_answers;
+
+    /** The Question constructor. */
     public Question(String question, String correct_answer, ArrayList<String> incorrect_answers){
         this.question = question;
         this.correct_answer = correct_answer;

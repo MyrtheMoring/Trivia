@@ -10,9 +10,9 @@
     <TextView
         android:id="@+id/categorychoice"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Choose your category"
         android:textSize="28sp"
